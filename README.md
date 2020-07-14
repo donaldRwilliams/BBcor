@@ -1,0 +1,2 @@
+# BBcor
+Bayesian Bootstrapped Correlations
