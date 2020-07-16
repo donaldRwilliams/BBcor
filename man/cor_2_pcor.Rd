@@ -25,6 +25,7 @@ Convert correlations into the corresponding partial correlations.
 Y <- mtcars[,1:3]
 
 fit <- bbcor(Y, method = "spearman")
+
 cor_2_pcor(fit)
 
 }
