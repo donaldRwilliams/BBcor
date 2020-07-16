@@ -1,12 +1,21 @@
 Package: BBcor
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Bayesian Bootstrapping Correlations
+Version: 1.0.0
+Authors@R: person("Donald", "Williams", email = "drwwilliams@ucdavis.edu", role = c("aut", "cre"))
+Description: Efficiently draws samples from the posterior distribution of various correlation coefficients 
+             with the Bayesian bootstrap <doi:10.1214/aos/1176345338>. 
+             There are four correlation coefficients, including 
+             Pearson, Kendall, Spearman, and Blomqvist.
+Depends: R (>= 3.5.0)
+License: GPL-2
+Imports:
+  parallel,
+  pbapply (>= 1.4-2),
+  psych (>= 1.9.12.31),
+  wdm (>= 0.2.1),
+  stats,
+  utils
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
