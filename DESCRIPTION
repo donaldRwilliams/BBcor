@@ -7,7 +7,7 @@ Description: Efficiently draw samples from the posterior distribution of various
              with the Bayesian bootstrap <doi:10.1214/aos/1176345338>. 
              There are five correlation coefficients, including 
              Pearson, Kendall, Spearman, Blomqvist, and polychoric.
-Depends: R (>= 3.5.0)
+Depends: R (>= 4.0.0)
 License: GPL-2
 Imports:
   parallel,
