@@ -20,8 +20,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of BBcor is to provide an efficient way to obtain samples from the posterior distribution for 
-various correlation coefficients:
+The goal of BBcor is to provide an efficient way to obtain samples from the 
+posterior distribution of various correlation coefficients:
 
 * Pearson (`method = "pearson"`)
 
