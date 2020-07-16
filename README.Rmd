@@ -80,4 +80,7 @@ pcors <- cor_2_pcor(bb_sample)
 pcors$pcor_mean
 ```
 
+Note that the objects `bb_sample` and `pcors` include a 3D array that includes the sampled 
+correlation or partial correlation matrices.
+
 ## References
