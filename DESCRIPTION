@@ -3,7 +3,7 @@ Type: Package
 Title: Bayesian Bootstrapping Correlations
 Version: 1.0.0
 Authors@R: person("Donald", "Williams", email = "drwwilliams@ucdavis.edu", role = c("aut", "cre"))
-Description: Efficiently draws samples from the posterior distribution of various correlation coefficients 
+Description: Efficiently draw samples from the posterior distribution of various correlation coefficients 
              with the Bayesian bootstrap <doi:10.1214/aos/1176345338>. 
              There are four correlation coefficients, including 
              Pearson, Kendall, Spearman, and Blomqvist.
