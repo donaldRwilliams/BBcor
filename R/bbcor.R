@@ -19,6 +19,7 @@
 #' @importFrom pbapply pbreplicate 
 #' @importFrom wdm wdm 
 #' @importFrom parallel stopCluster makeCluster
+#' @importFrom methods is
 #' @return 
 #' 
 #' \itemize{
@@ -42,6 +43,8 @@ bbcor <- function(x,
                   method = "pearson", 
                   iter = 5000, 
                   cores = 2){
+  
+  Y <- x
   x <- stats::na.omit(x)
   p <- ncol(x)
   n <- nrow(x)
@@ -89,6 +92,41 @@ bbcor <- function(x,
   returned_object <- list(cor_mean = cor_mean, 
                           samps = samps, 
                           method = method, 
-                          iter = iter)
+                          iter = iter, 
+                          Y = Y)
+  class(returned_object) <- c("bbcor", "default")
   return(returned_object)
+}
+
+
+#' Print \code{bbcor} Objects 
+#' 
+#' Print the correlation or partial correlation matrix
+#' 
+#' @param x An object of class \code{bbcor}
+#' @param ... Currently ignored
+#' @export
+print.bbcor <- function(x,...){
+  
+  if (methods::is(x, "default")) {
+    mat <- as.data.frame(x$cor_mean)
+    if (is.null(colnames(x$Y))) {
+      colnames(mat) <- 1:ncol(x$Y)
+      row.names(mat) <- 1:ncol(x$Y)
+    } else {
+      colnames(mat) <- colnames(x$Y)
+      row.names(mat) <- colnames(x$Y)
+    }
+  }
+  if (methods::is(x, "cor_2_pcor")) {
+    mat <- as.data.frame(x$pcor_mean)
+    if (is.null(colnames(x$Y))) {
+      colnames(mat) <- 1:ncol(x$Y)
+      row.names(mat) <- 1:ncol(x$Y)
+    } else {
+      colnames(mat) <- colnames(x$Y)
+      row.names(mat) <- colnames(x$Y)
+    }
+  }
+  print(mat)
 }

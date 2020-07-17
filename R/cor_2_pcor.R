@@ -32,7 +32,13 @@ cor_2_pcor <- function(x,...){
   pcor_mean <- apply(samps, 1:2, mean)
   
   returned_object <- list(pcor_mean = pcor_mean, 
-                          samps = samps)
+                          samps = samps, 
+                          iter = x$iter, 
+                          Y = x$Y)
   
+  class(returned_object) <- c("bbcor", "cor_2_pcor")
   return(returned_object)
 }
+
+
+

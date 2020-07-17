@@ -83,4 +83,15 @@ pcors$pcor_mean
 Note that the objects `bb_sample` and `pcors` include a 3D array with the sampled 
 correlation or partial correlation matrices.
 
+## Example: Posterior Samples
+The posterior samples can be summarized as follows
+```{r}
+post_summary <- posterior_samples(pcors, summary = TRUE, cred = 0.95)
+
+# print
+post_summary
+```
+
+Note that setting `summary = FALSE` returns the posterior samples in a data frame.
+
 ## References
