@@ -22,21 +22,32 @@
 #' @export
 cor_2_pcor <- function(x,...){
   
+  # variables
   p <- ncol(x$cor_mean)
   
+  # posterior samples
   iter <- x$iter
   
-  samps <- array(sapply(1:iter, function(s) -cov2cor(solve(x$samps[,,s])) + diag(2, p), 
-                        simplify = TRUE), c(p, p, iter))
+  # convert to pcors
+  samps <- array(
+    sapply(1:iter, function(s)
+      - cov2cor(solve(x$samps[, , s])) + diag(2, p),
+      simplify = TRUE),
+    c( p, p, iter)
+    )
   
+  # pcor means
   pcor_mean <- apply(samps, 1:2, mean)
   
+  # returned object
   returned_object <- list(pcor_mean = pcor_mean, 
                           samps = samps, 
                           iter = x$iter, 
                           Y = x$Y)
   
-  class(returned_object) <- c("bbcor", "cor_2_pcor")
+  # assing class
+  class(returned_object) <- c("bbcor", 
+                              "cor_2_pcor")
   return(returned_object)
 }
 

@@ -4,7 +4,7 @@ Title: Bayesian Bootstrapping Correlations
 Version: 1.0.0
 Authors@R: person("Donald", "Williams", email = "drwwilliams@ucdavis.edu", role = c("aut", "cre"))
 Description: Efficiently draw samples from the posterior distribution of various correlation coefficients 
-             with the Bayesian bootstrap <doi:10.1214/aos/1176345338>. 
+             with the Bayesian bootstrap described in Rubin (1981) <doi:10.1214/aos/1176345338>. 
              There are five correlation coefficients, including 
              Pearson, Kendall, Spearman, Blomqvist, and polychoric.
 Depends: R (>= 4.0.0)
