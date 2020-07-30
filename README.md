@@ -3,12 +3,11 @@
 
 # **BBcor**: Bayesian Bootstrapping Correlations
 
+[![CRAN
+Version](http://www.r-pkg.org/badges/version/BBcor)](https://cran.r-project.org/package=BBcor)
+[![Downloads](https://cranlogs.r-pkg.org/badges/BBcor)](https://cran.r-project.org/package=BBcor)
 [![Build
 Status](https://travis-ci.org/donaldRwilliams/BBcor.svg?branch=master)](https://travis-ci.org/donaldRwilliams/BBcor)
-
-<!-- badges: start -->
-
-<!-- badges: end -->
 
 The goal of BBcor is to provide an efficient way to obtain samples from
 the posterior distribution of various correlation coefficients:
@@ -62,11 +61,11 @@ bb_sample <- bbcor(Y, method = "spearman")
 # correlation matrix
 bb_sample$cor_mean
 #>            [,1]       [,2]       [,3]       [,4]       [,5]
-#> [1,]  1.0000000 -0.9120268 -0.9084441 -0.8945658  0.6516626
-#> [2,] -0.9120268  1.0000000  0.9285823  0.9022099 -0.6810021
-#> [3,] -0.9084441  0.9285823  1.0000000  0.8507521 -0.6843229
-#> [4,] -0.8945658  0.9022099  0.8507521  1.0000000 -0.5255842
-#> [5,]  0.6516626 -0.6810021 -0.6843229 -0.5255842  1.0000000
+#> [1,]  1.0000000 -0.9110503 -0.9074607 -0.8945129  0.6485464
+#> [2,] -0.9110503  1.0000000  0.9290431  0.9023094 -0.6778860
+#> [3,] -0.9074607  0.9290431  1.0000000  0.8517995 -0.6813720
+#> [4,] -0.8945129  0.9023094  0.8517995  1.0000000 -0.5225487
+#> [5,]  0.6485464 -0.6778860 -0.6813720 -0.5225487  1.0000000
 ```
 
 ## Example: Partial Correlations
@@ -80,12 +79,12 @@ pcors <- cor_2_pcor(bb_sample)
 
 # partial correlation matrix
 pcors$pcor_mean
-#>            [,1]       [,2]        [,3]        [,4]       [,5]
-#> [1,]  1.0000000 -0.1007303 -0.38561256 -0.45298924  0.1821618
-#> [2,] -0.1007303  1.0000000  0.46461066  0.49455998 -0.3027317
-#> [3,] -0.3856126  0.4646107  1.00000000 -0.04635827 -0.1376748
-#> [4,] -0.4529892  0.4945600 -0.04635827  1.00000000  0.3488617
-#> [5,]  0.1821618 -0.3027317 -0.13767481  0.34886172  1.0000000
+#>             [,1]        [,2]        [,3]        [,4]       [,5]
+#> [1,]  1.00000000 -0.09707313 -0.37959227 -0.45575557  0.1832972
+#> [2,] -0.09707313  1.00000000  0.47010459  0.49238943 -0.3002126
+#> [3,] -0.37959227  0.47010459  1.00000000 -0.04267985 -0.1394336
+#> [4,] -0.45575557  0.49238943 -0.04267985  1.00000000  0.3478556
+#> [5,]  0.18329721 -0.30021256 -0.13943364  0.34785560  1.0000000
 ```
 
 Note that the objects `bb_sample` and `pcors` include a 3D array with
@@ -101,16 +100,16 @@ post_summary <- posterior_samples(pcors, summary = TRUE, cred = 0.95)
 # print
 post_summary
 #>      Relation Post.mean Post.sd Cred.lb Cred.ub
-#> 1    mpg--cyl   -0.1007  0.1695 -0.4046  0.2552
-#> 2   mpg--disp   -0.3856  0.1597 -0.6701 -0.0549
-#> 3   cyl--disp    0.4646  0.1404  0.1521  0.7000
-#> 4     mpg--hp   -0.4530  0.1306 -0.6801 -0.1728
-#> 5     cyl--hp    0.4946  0.1197  0.2423  0.7075
-#> 6    disp--hp   -0.0464  0.1416 -0.3241  0.2387
-#> 7   mpg--drat    0.1822  0.1789 -0.1857  0.5118
-#> 8   cyl--drat   -0.3027  0.1443 -0.5694 -0.0066
-#> 9  disp--drat   -0.1377  0.1428 -0.4087  0.1431
-#> 10   hp--drat    0.3489  0.1853 -0.0354  0.6788
+#> 1    mpg--cyl   -0.0971  0.1703 -0.4132  0.2438
+#> 2   mpg--disp   -0.3796  0.1598 -0.6605 -0.0498
+#> 3   cyl--disp    0.4701  0.1377  0.1708  0.7050
+#> 4     mpg--hp   -0.4558  0.1295 -0.6851 -0.1839
+#> 5     cyl--hp    0.4924  0.1203  0.2372  0.7020
+#> 6    disp--hp   -0.0427  0.1415 -0.3159  0.2356
+#> 7   mpg--drat    0.1833  0.1817 -0.1948  0.5116
+#> 8   cyl--drat   -0.3002  0.1443 -0.5640  0.0041
+#> 9  disp--drat   -0.1394  0.1437 -0.4128  0.1498
+#> 10   hp--drat    0.3479  0.1917 -0.0583  0.6764
 ```
 
 Note that setting `summary = FALSE` returns the posterior samples in a

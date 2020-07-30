@@ -15,10 +15,10 @@ knitr::opts_chunk$set(
 ```
 
 # **BBcor**: Bayesian Bootstrapping Correlations
+[![CRAN Version](http://www.r-pkg.org/badges/version/BBcor)](https://cran.r-project.org/package=BBcor)
+[![Downloads](https://cranlogs.r-pkg.org/badges/BBcor)](https://cran.r-project.org/package=BBcor)
 [![Build Status](https://travis-ci.org/donaldRwilliams/BBcor.svg?branch=master)](https://travis-ci.org/donaldRwilliams/BBcor)
 
-<!-- badges: start -->
-<!-- badges: end -->
 
 The goal of BBcor is to provide an efficient way to obtain samples from the 
 posterior distribution of various correlation coefficients:
