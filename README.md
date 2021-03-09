@@ -12,26 +12,25 @@ Status](https://travis-ci.org/donaldRwilliams/BBcor.svg?branch=master)](https://
 The goal of BBcor is to provide an efficient way to obtain samples from
 the posterior distribution of various correlation coefficients:
 
-  - Pearson (`method = "pearson"`)
+-   Pearson (`method = "pearson"`)
 
-  - Spearman (`method = "spearman"`)
+-   Spearman (`method = "spearman"`)
 
-  - Kendall (`method = "kendall"`)
+-   Gaussian Rank (`method = "gaussian_rank"`)
 
-  - Blomqvist (`method = "blomqvist"`; median correlation)
+-   Kendall (`method = "kendall"`)
 
-  - Polychoric (`method = "polychoric"`)
+-   Blomqvist (`method = "blomqvist"`; median correlation)
+
+-   Polychoric (`method = "polychoric"`)
 
 The method is based on Rubin (1981).
 
 ## Installation
 
 <!-- You can install the released version of BBcor from [CRAN](https://CRAN.R-project.org) with: -->
-
 <!-- ``` r -->
-
 <!-- install.packages("BBcor") -->
-
 <!-- ``` -->
 
 You can install the development version from
@@ -61,11 +60,11 @@ bb_sample <- bbcor(Y, method = "spearman")
 # correlation matrix
 bb_sample$cor_mean
 #>            [,1]       [,2]       [,3]       [,4]       [,5]
-#> [1,]  1.0000000 -0.9110503 -0.9074607 -0.8945129  0.6485464
-#> [2,] -0.9110503  1.0000000  0.9290431  0.9023094 -0.6778860
-#> [3,] -0.9074607  0.9290431  1.0000000  0.8517995 -0.6813720
-#> [4,] -0.8945129  0.9023094  0.8517995  1.0000000 -0.5225487
-#> [5,]  0.6485464 -0.6778860 -0.6813720 -0.5225487  1.0000000
+#> [1,]  1.0000000 -0.9113906 -0.9077460 -0.8946015  0.6480759
+#> [2,] -0.9113906  1.0000000  0.9284389  0.9024415 -0.6786383
+#> [3,] -0.9077460  0.9284389  1.0000000  0.8506681 -0.6821720
+#> [4,] -0.8946015  0.9024415  0.8506681  1.0000000 -0.5233418
+#> [5,]  0.6480759 -0.6786383 -0.6821720 -0.5233418  1.0000000
 ```
 
 ## Example: Partial Correlations
@@ -80,11 +79,11 @@ pcors <- cor_2_pcor(bb_sample)
 # partial correlation matrix
 pcors$pcor_mean
 #>             [,1]        [,2]        [,3]        [,4]       [,5]
-#> [1,]  1.00000000 -0.09707313 -0.37959227 -0.45575557  0.1832972
-#> [2,] -0.09707313  1.00000000  0.47010459  0.49238943 -0.3002126
-#> [3,] -0.37959227  0.47010459  1.00000000 -0.04267985 -0.1394336
-#> [4,] -0.45575557  0.49238943 -0.04267985  1.00000000  0.3478556
-#> [5,]  0.18329721 -0.30021256 -0.13943364  0.34785560  1.0000000
+#> [1,]  1.00000000 -0.09731807 -0.38432175 -0.45493380  0.1778988
+#> [2,] -0.09731807  1.00000000  0.46776101  0.49552520 -0.3035051
+#> [3,] -0.38432175  0.46776101  1.00000000 -0.04765557 -0.1400437
+#> [4,] -0.45493380  0.49552520 -0.04765557  1.00000000  0.3465090
+#> [5,]  0.17789883 -0.30350508 -0.14004368  0.34650901  1.0000000
 ```
 
 Note that the objects `bb_sample` and `pcors` include a 3D array with
@@ -100,16 +99,16 @@ post_summary <- posterior_samples(pcors, summary = TRUE, cred = 0.95)
 # print
 post_summary
 #>      Relation Post.mean Post.sd Cred.lb Cred.ub
-#> 1    mpg--cyl   -0.0971  0.1703 -0.4132  0.2438
-#> 2   mpg--disp   -0.3796  0.1598 -0.6605 -0.0498
-#> 3   cyl--disp    0.4701  0.1377  0.1708  0.7050
-#> 4     mpg--hp   -0.4558  0.1295 -0.6851 -0.1839
-#> 5     cyl--hp    0.4924  0.1203  0.2372  0.7020
-#> 6    disp--hp   -0.0427  0.1415 -0.3159  0.2356
-#> 7   mpg--drat    0.1833  0.1817 -0.1948  0.5116
-#> 8   cyl--drat   -0.3002  0.1443 -0.5640  0.0041
-#> 9  disp--drat   -0.1394  0.1437 -0.4128  0.1498
-#> 10   hp--drat    0.3479  0.1917 -0.0583  0.6764
+#> 1    mpg--cyl   -0.0973  0.1694 -0.4077  0.2481
+#> 2   mpg--disp   -0.3843  0.1600 -0.6681 -0.0447
+#> 3   cyl--disp    0.4678  0.1369  0.1727  0.6947
+#> 4     mpg--hp   -0.4549  0.1293 -0.6806 -0.1764
+#> 5     cyl--hp    0.4955  0.1212  0.2352  0.7114
+#> 6    disp--hp   -0.0477  0.1429 -0.3271  0.2336
+#> 7   mpg--drat    0.1779  0.1824 -0.2005  0.5079
+#> 8   cyl--drat   -0.3035  0.1434 -0.5600 -0.0111
+#> 9  disp--drat   -0.1400  0.1458 -0.4160  0.1536
+#> 10   hp--drat    0.3465  0.1894 -0.0464  0.6764
 ```
 
 Note that setting `summary = FALSE` returns the posterior samples in a
@@ -117,9 +116,9 @@ data frame.
 
 ## References
 
-<div id="refs" class="references">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-rubin1981bayesian">
+<div id="ref-rubin1981bayesian" class="csl-entry">
 
 Rubin, Donald B. 1981. “The Bayesian Bootstrap.” *The Annals of
 Statistics*, 130–34.
