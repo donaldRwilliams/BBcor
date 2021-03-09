@@ -6,9 +6,10 @@ bb_weights <- function(n){
 
 normalize <- function(data, n) {
   x_ranked <- rank(data, ties.method = "random")
+  
   x <- x_ranked / (n + 1)
   
-  normalized_data <- qnorm(x)
+  normalized_data <- stats::qnorm(x)
   
   return(normalized_data)
 }

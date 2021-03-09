@@ -1,7 +1,7 @@
 Package: BBcor
 Type: Package
 Title: Bayesian Bootstrapping Correlations
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
   person("Donald", "Williams", email = "drwwilliams@ucdavis.edu", role = c("aut", "cre")),
   person("Josue", "Rodriguez", email = "jerrodriguez@ucdavis.edu", role = c("aut", "ctb"))
