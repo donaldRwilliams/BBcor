@@ -27,6 +27,8 @@ posterior distribution of various correlation coefficients:
 
 * Spearman (`method = "spearman"`)
 
+* Gaussian Rank (`method = "gaussian_rank"`)
+
 * Kendall (`method = "kendall"`)
 
 * Blomqvist (`method = "blomqvist"`; median correlation)

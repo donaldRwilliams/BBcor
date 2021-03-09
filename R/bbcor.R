@@ -6,7 +6,7 @@
 #' @param x A matrix of dimensions \emph{n} by \emph{p}
 #' 
 #' @param method Character string. Which correlation coefficient should be computed. 
-#'               One of "pearson" (default), "kendall", "spearman", or "blomqvist"
+#'               One of "pearson" (default), "kendall", "spearman", "gaussian_rank", or "blomqvist"
 #'               (i.e., median correlation).
 #' 
 #' @param iter Numeric. How many posterior samples (defaults to \code{5000}) ?
@@ -69,7 +69,7 @@ bbcor <- function(x,
     # draw from posterior
     samps  <- pbapply::pbreplicate(n = iter,
                                    stats::cov.wt(x,
-                                          wt =  bb_weights(n),
+                                          wt = bb_weights(n),
                                           cor = TRUE)$cor,
                                    cl = cl)
     
@@ -81,7 +81,7 @@ bbcor <- function(x,
       # draw from posterior
       samps  <- pbapply::pbreplicate(n = iter,
                                    stats::cov.wt(x,
-                                          wt =  bb_weights(n),
+                                          wt = bb_weights(n),
                                           cor = TRUE)$cor,
                                    cl = cl)
     
@@ -89,7 +89,18 @@ bbcor <- function(x,
       
       # draw from posterior
       samps  <- pbapply::pbreplicate(n = iter,
-                                     psych::polychoric(x, weight =  bb_weights(n))$rho,
+                                     psych::polychoric(x, weight = bb_weights(n))$rho,
+                                     cl = cl)
+    } else if ( method == "gaussian_rank" ) {
+
+      # normalized ranks
+      x <- sapply(1:p, function(i) normalize(x[, i], n))
+      
+      # draw from posterior
+      samps  <- pbapply::pbreplicate(n = iter,
+                                     stats::cov.wt(x,
+                                                   wt = bb_weights(n),
+                                                   cor = TRUE)$cor,
                                      cl = cl)
     } else {
       
