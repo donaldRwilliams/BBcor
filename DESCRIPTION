@@ -19,7 +19,8 @@ Imports:
   wdm (>= 0.2.1),
   stats,
   utils,
-  methods
+  methods,
+  bayeslincom (>= 1.1.0)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
