@@ -4,7 +4,7 @@ Title: Bayesian Bootstrapping Correlations
 Version: 1.0.1
 Authors@R: c(
   person("Donald", "Williams", email = "drwwilliams@ucdavis.edu", role = c("aut", "cre")),
-  person("Josue", "Rodriguez", email = "jerrodriguez@ucdavis.edu", role = c("aut", "ctb"))
+  person("Josue", "Rodriguez", email = "jerrodriguez@ucdavis.edu", role = c("aut"))
   )
 Description: Efficiently draw samples from the posterior distribution of various correlation coefficients 
              with the Bayesian bootstrap described in Rubin (1981) <doi:10.1214/aos/1176345338>. 
