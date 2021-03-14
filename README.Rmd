@@ -10,8 +10,22 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  dpi = 200,
+  knitr::opts_chunk$set(comment = NA)
 )
+
+
+# knitr::opts_chunk$set(
+#   collapse = TRUE,
+#   comment = "#>",
+#   fig.path = "man/figures/README-",
+#   dev = "png",
+#   dpi = 200,
+#   fig.align = "center",
+#   fig.height = "70%",
+#   fig.width = "70%",
+#   knitr::opts_chunk$set(comment = NA)
+#   )
 ```
 
 # **BBcor**: Bayesian Bootstrapping Correlations
@@ -100,7 +114,7 @@ Note that setting `summary = FALSE` returns the posterior samples in a data fram
 
 Comparisons can then be made using the `compare` function using a string to specify which comparisons to be made
 
-```{r dpi=300}
+```{r}
 comparisons <- c("mpg--cyl > mpg--disp",
                  "mpg--disp - mpg--hp = 0")
 post_comparisons <- compare(comparisons,
@@ -108,10 +122,15 @@ post_comparisons <- compare(comparisons,
                             cred = 0.9)
 
 post_comparisons
-
-plot(post_comparisons)
 ```
 
+```r
+plot(post_comparisons) +
+  ggplot2::theme_classic()
+```
+```{r echo=FALSE, out.height="20%", out.width="75%", fig.align='center'}
+knitr::include_graphics("inst/comparison-plot.png", dpi=300)
+```
 
 or with a contrast matrix
 
