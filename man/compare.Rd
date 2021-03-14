@@ -4,18 +4,18 @@
 \alias{compare}
 \title{Compare Bayesian bootstrapped correlations}
 \usage{
-compare(lin_comb, obj, ci = 0.9, rope = NULL, contrast = NULL)
+compare(lin_comb, obj, cred = 0.9, rope = NULL, contrast = NULL)
 }
 \arguments{
 \item{lin_comb}{A string specifying a linear combination of variables, or a list of variable names if using \code{contrast}.}
 
 \item{obj}{An object of class \code{BGGM}, \code{bbcor}, or a \code{data.frame} of posterior samples.}
 
-\item{ci}{The level for which a credible interval should be computed.}
+\item{cred}{The level for which a credible interval should be computed.}
 
 \item{rope}{Specify a ROPE. Optional.}
 
-\item{contrast}{A contrast matrix specifying which combinations to test.}
+\item{contrast}{A contrast matrix specifying which combinations to test. Optional.}
 }
 \value{
 An object of class \code{bayeslincom}
@@ -28,7 +28,7 @@ Y <- mtcars[, 1:3]
 bb <- bbcor(Y)
 bb_compare <- compare("mpg--cyl > mpg--disp",
                      obj = bb,
-                     ci = 0.90,
+                     cred = 0.90,
                      rope = c(-0.1, 0.1))
 bb_compare
 }

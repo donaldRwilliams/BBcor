@@ -105,7 +105,7 @@ comparisons <- c("mpg--cyl > mpg--disp",
                  "mpg--disp - mpg--hp = 0")
 post_comparisons <- compare(comparisons,
                             obj = pcors,
-                            ci = 0.9)
+                            cred = 0.9)
 
 post_comparisons
 
@@ -125,7 +125,7 @@ contrast_mat <- matrix(c(1, -1, 0,
 post_comparisons <- compare(c("mpg--cyl", "mpg--disp", "mpg--hp"),
                             obj = pcors,
                             contrast = contrast_mat,
-                            ci = 0.9)
+                            cred = 0.9)
 
 post_comparisons
 ```

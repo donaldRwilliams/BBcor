@@ -23,11 +23,11 @@ normalize <- function(data, n) {
 #'
 #' @param obj An object of class \code{BGGM}, \code{bbcor}, or a \code{data.frame} of posterior samples.
 #'
-#' @param ci The level for which a credible interval should be computed.
+#' @param cred The level for which a credible interval should be computed.
 #'
 #' @param rope Specify a ROPE. Optional.
 #'
-#' @param contrast A contrast matrix specifying which combinations to test.
+#' @param contrast A contrast matrix specifying which combinations to test. Optional.
 #'
 #' @return An object of class \code{bayeslincom}
 #' 
@@ -37,14 +37,25 @@ normalize <- function(data, n) {
 #'bb <- bbcor(Y)
 #'bb_compare <- compare("mpg--cyl > mpg--disp",
 #'                      obj = bb,
-#'                      ci = 0.90,
+#'                      cred = 0.90,
 #'                      rope = c(-0.1, 0.1))
 #'bb_compare
 #' @importFrom bayeslincom lin_comb
 #' @export
 #' @export compare
 
-compare <- bayeslincom::lin_comb
+compare <- function(lin_comb, obj, cred = 0.9, rope = NULL, contrast = NULL) {
+  
+    out <- bayeslincom::lin_comb(
+      lin_comb = lin_comb,
+      obj = obj,
+      ci = cred,
+      rope = rope,
+      contrast = contrast      
+    )
+    return(out)
+  }
+
 
 #' Plot comparisons from \code{compare}
 #' 
@@ -67,7 +78,7 @@ compare <- bayeslincom::lin_comb
 #'bb <- bbcor(Y)
 #'bb_compare <- compare("mpg--cyl > mpg--disp",
 #'                      obj = bb,
-#'                      ci = 0.90,
+#'                      cred = 0.90,
 #'                      rope = c(-0.1, 0.1))
 #'plot(bb_compare)
 #'

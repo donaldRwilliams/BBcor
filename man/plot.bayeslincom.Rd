@@ -45,7 +45,7 @@ Y <- mtcars[, 1:3]
 bb <- bbcor(Y)
 bb_compare <- compare("mpg--cyl > mpg--disp",
                      obj = bb,
-                     ci = 0.90,
+                     cred = 0.90,
                      rope = c(-0.1, 0.1))
 plot(bb_compare)
 
