@@ -13,19 +13,6 @@ knitr::opts_chunk$set(
   dpi = 200,
   knitr::opts_chunk$set(comment = NA)
 )
-
-
-# knitr::opts_chunk$set(
-#   collapse = TRUE,
-#   comment = "#>",
-#   fig.path = "man/figures/README-",
-#   dev = "png",
-#   dpi = 200,
-#   fig.align = "center",
-#   fig.height = "70%",
-#   fig.width = "70%",
-#   knitr::opts_chunk$set(comment = NA)
-#   )
 ```
 
 # **BBcor**: Bayesian Bootstrapping Correlations
