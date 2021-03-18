@@ -1,12 +1,15 @@
 Package: BBcor
 Type: Package
 Title: Bayesian Bootstrapping Correlations
-Version: 1.0.0
-Authors@R: person("Donald", "Williams", email = "drwwilliams@ucdavis.edu", role = c("aut", "cre"))
+Version: 1.0.1
+Authors@R: c(
+  person("Donald", "Williams", email = "drwwilliams@ucdavis.edu", role = c("aut", "cre")),
+  person("Josue", "Rodriguez", email = "jerrodriguez@ucdavis.edu", role = c("aut"))
+  )
 Description: Efficiently draw samples from the posterior distribution of various correlation coefficients 
              with the Bayesian bootstrap described in Rubin (1981) <doi:10.1214/aos/1176345338>. 
-             There are five correlation coefficients, including 
-             Pearson, Kendall, Spearman, Blomqvist, and polychoric.
+             There are six correlation coefficients, including 
+             Pearson, Kendall, Spearman, Gaussian Rank, Blomqvist, and polychoric.
 Depends: R (>= 4.0.0)
 License: GPL-2
 Imports:
@@ -16,7 +19,8 @@ Imports:
   wdm (>= 0.2.1),
   stats,
   utils,
-  methods
+  methods,
+  bayeslincom (>= 1.1.0)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1

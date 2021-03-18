@@ -10,7 +10,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  dpi = 200,
+  knitr::opts_chunk$set(comment = NA)
 )
 ```
 
@@ -27,13 +28,15 @@ posterior distribution of various correlation coefficients:
 
 * Spearman (`method = "spearman"`)
 
+* Gaussian Rank (`method = "gaussian_rank"`)
+
 * Kendall (`method = "kendall"`)
 
 * Blomqvist (`method = "blomqvist"`; median correlation)
 
 * Polychoric (`method = "polychoric"`)
 
-The method is based on @rubin1981bayesian.
+The method is based on @rubin1981bayesian and described in @rodriguez2021painless.
 
 ## Installation
 
@@ -93,5 +96,45 @@ post_summary
 ```
 
 Note that setting `summary = FALSE` returns the posterior samples in a data frame.
+
+## Example: Comparing Correlations
+
+Comparisons can then be made using the `compare` function using a string to specify which comparisons to be made
+
+```{r}
+comparisons <- c("mpg--cyl > mpg--disp",
+                 "mpg--disp - mpg--hp = 0")
+post_comparisons <- compare(comparisons,
+                            obj = pcors,
+                            cred = 0.9)
+
+post_comparisons
+```
+
+```r
+plot(post_comparisons) +
+  ggplot2::theme_classic()
+```
+```{r echo=FALSE, out.height="20%", out.width="75%", fig.align='center'}
+knitr::include_graphics("inst/comparison-plot.png", dpi=300)
+```
+
+or with a contrast matrix
+
+```{r}
+contrast_mat <- matrix(c(1, -1, 0, 
+                         0, 1, -1), 
+                       nrow = 2, 
+                       byrow = TRUE)
+
+
+post_comparisons <- compare(c("mpg--cyl", "mpg--disp", "mpg--hp"),
+                            obj = pcors,
+                            contrast = contrast_mat,
+                            cred = 0.9)
+
+post_comparisons
+```
+
 
 ## References

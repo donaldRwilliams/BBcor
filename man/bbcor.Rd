@@ -10,7 +10,7 @@ bbcor(x, method = "pearson", iter = 5000, cores = 2)
 \item{x}{A matrix of dimensions \emph{n} by \emph{p}}
 
 \item{method}{Character string. Which correlation coefficient should be computed. 
-One of "pearson" (default), "kendall", "spearman", or "blomqvist"
+One of "pearson" (default), "kendall", "spearman", "gaussian_rank", or "blomqvist"
 (i.e., median correlation).}
 
 \item{iter}{Numeric. How many posterior samples (defaults to \code{5000}) ?}

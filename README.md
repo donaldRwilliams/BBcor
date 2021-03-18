@@ -12,26 +12,26 @@ Status](https://travis-ci.org/donaldRwilliams/BBcor.svg?branch=master)](https://
 The goal of BBcor is to provide an efficient way to obtain samples from
 the posterior distribution of various correlation coefficients:
 
-  - Pearson (`method = "pearson"`)
+-   Pearson (`method = "pearson"`)
 
-  - Spearman (`method = "spearman"`)
+-   Spearman (`method = "spearman"`)
 
-  - Kendall (`method = "kendall"`)
+-   Gaussian Rank (`method = "gaussian_rank"`)
 
-  - Blomqvist (`method = "blomqvist"`; median correlation)
+-   Kendall (`method = "kendall"`)
 
-  - Polychoric (`method = "polychoric"`)
+-   Blomqvist (`method = "blomqvist"`; median correlation)
 
-The method is based on Rubin (1981).
+-   Polychoric (`method = "polychoric"`)
+
+The method is based on Rubin (1981) and described in Rodriguez and
+Williams (2021).
 
 ## Installation
 
 <!-- You can install the released version of BBcor from [CRAN](https://CRAN.R-project.org) with: -->
-
 <!-- ``` r -->
-
 <!-- install.packages("BBcor") -->
-
 <!-- ``` -->
 
 You can install the development version from
@@ -61,11 +61,11 @@ bb_sample <- bbcor(Y, method = "spearman")
 # correlation matrix
 bb_sample$cor_mean
 #>            [,1]       [,2]       [,3]       [,4]       [,5]
-#> [1,]  1.0000000 -0.9110503 -0.9074607 -0.8945129  0.6485464
-#> [2,] -0.9110503  1.0000000  0.9290431  0.9023094 -0.6778860
-#> [3,] -0.9074607  0.9290431  1.0000000  0.8517995 -0.6813720
-#> [4,] -0.8945129  0.9023094  0.8517995  1.0000000 -0.5225487
-#> [5,]  0.6485464 -0.6778860 -0.6813720 -0.5225487  1.0000000
+#> [1,]  1.0000000 -0.9111911 -0.9081057 -0.8933434  0.6478409
+#> [2,] -0.9111911  1.0000000  0.9284490  0.9016077 -0.6767364
+#> [3,] -0.9081057  0.9284490  1.0000000  0.8501056 -0.6806186
+#> [4,] -0.8933434  0.9016077  0.8501056  1.0000000 -0.5193009
+#> [5,]  0.6478409 -0.6767364 -0.6806186 -0.5193009  1.0000000
 ```
 
 ## Example: Partial Correlations
@@ -80,11 +80,11 @@ pcors <- cor_2_pcor(bb_sample)
 # partial correlation matrix
 pcors$pcor_mean
 #>             [,1]        [,2]        [,3]        [,4]       [,5]
-#> [1,]  1.00000000 -0.09707313 -0.37959227 -0.45575557  0.1832972
-#> [2,] -0.09707313  1.00000000  0.47010459  0.49238943 -0.3002126
-#> [3,] -0.37959227  0.47010459  1.00000000 -0.04267985 -0.1394336
-#> [4,] -0.45575557  0.49238943 -0.04267985  1.00000000  0.3478556
-#> [5,]  0.18329721 -0.30021256 -0.13943364  0.34785560  1.0000000
+#> [1,]  1.00000000 -0.09485614 -0.38536808 -0.45399594  0.1852590
+#> [2,] -0.09485614  1.00000000  0.46793163  0.49707586 -0.3042260
+#> [3,] -0.38536808  0.46793163  1.00000000 -0.04717437 -0.1366473
+#> [4,] -0.45399594  0.49707586 -0.04717437  1.00000000  0.3524484
+#> [5,]  0.18525904 -0.30422602 -0.13664735  0.35244840  1.0000000
 ```
 
 Note that the objects `bb_sample` and `pcors` include a 3D array with
@@ -100,26 +100,110 @@ post_summary <- posterior_samples(pcors, summary = TRUE, cred = 0.95)
 # print
 post_summary
 #>      Relation Post.mean Post.sd Cred.lb Cred.ub
-#> 1    mpg--cyl   -0.0971  0.1703 -0.4132  0.2438
-#> 2   mpg--disp   -0.3796  0.1598 -0.6605 -0.0498
-#> 3   cyl--disp    0.4701  0.1377  0.1708  0.7050
-#> 4     mpg--hp   -0.4558  0.1295 -0.6851 -0.1839
-#> 5     cyl--hp    0.4924  0.1203  0.2372  0.7020
-#> 6    disp--hp   -0.0427  0.1415 -0.3159  0.2356
-#> 7   mpg--drat    0.1833  0.1817 -0.1948  0.5116
-#> 8   cyl--drat   -0.3002  0.1443 -0.5640  0.0041
-#> 9  disp--drat   -0.1394  0.1437 -0.4128  0.1498
-#> 10   hp--drat    0.3479  0.1917 -0.0583  0.6764
+#> 1    mpg--cyl   -0.0949  0.1692 -0.4124  0.2475
+#> 2   mpg--disp   -0.3854  0.1569 -0.6693 -0.0585
+#> 3   cyl--disp    0.4679  0.1374  0.1779  0.7034
+#> 4     mpg--hp   -0.4540  0.1284 -0.6771 -0.1806
+#> 5     cyl--hp    0.4971  0.1205  0.2392  0.7155
+#> 6    disp--hp   -0.0472  0.1386 -0.3173  0.2221
+#> 7   mpg--drat    0.1853  0.1810 -0.1898  0.5165
+#> 8   cyl--drat   -0.3042  0.1439 -0.5619 -0.0110
+#> 9  disp--drat   -0.1366  0.1428 -0.4123  0.1481
+#> 10   hp--drat    0.3524  0.1917 -0.0608  0.6881
 ```
 
 Note that setting `summary = FALSE` returns the posterior samples in a
 data frame.
 
+## Example: Comparing Correlations
+
+Comparisons can then be made using the `compare` function using a string
+to specify which comparisons to be made
+
+``` r
+comparisons <- c("mpg--cyl > mpg--disp",
+                 "mpg--disp - mpg--hp = 0")
+post_comparisons <- compare(comparisons,
+                            obj = pcors,
+                            cred = 0.9)
+
+post_comparisons
+#> bayeslincom: Linear Combinations of Posterior Samples
+#> ------ 
+#> Call:
+#> lin_comb.bbcor(lin_comb = lin_comb, obj = obj, ci = ci, rope = rope, 
+#>     contrast = contrast)
+#> ------ 
+#> Combinations:
+#>  C1: mpg--cyl > mpg--disp 
+#>  C2: mpg--disp - mpg--hp = 0 
+#> ------ 
+#> Posterior Summary:
+#> 
+#>    Post.mean Post.sd Cred.lb Cred.ub Pr.less Pr.greater
+#> C1      0.29    0.23    -0.1    0.66    0.10       0.90
+#> C2      0.07    0.23    -0.3    0.45    0.38       0.62
+#> ------ 
+#> Note:
+#> Pr.less: Posterior probability less than zero
+#> Pr.greater: Posterior probability greater than zero
+```
+
+``` r
+plot(post_comparisons) +
+  ggplot2::theme_classic()
+```
+
+<img src="inst/comparison-plot.png" width="75%" height="20%" style="display: block; margin: auto;" />
+
+or with a contrast matrix
+
+``` r
+contrast_mat <- matrix(c(1, -1, 0, 
+                         0, 1, -1), 
+                       nrow = 2, 
+                       byrow = TRUE)
+
+
+post_comparisons <- compare(c("mpg--cyl", "mpg--disp", "mpg--hp"),
+                            obj = pcors,
+                            contrast = contrast_mat,
+                            cred = 0.9)
+
+post_comparisons
+#> bayeslincom: Linear Combinations of Posterior Samples
+#> ------ 
+#> Call:
+#> lin_comb.bbcor(lin_comb = lin_comb, obj = obj, ci = ci, rope = rope, 
+#>     contrast = contrast)
+#> ------ 
+#> Combinations:
+#>  C1: C1 
+#>  C2: C2 
+#> ------ 
+#> Posterior Summary:
+#> 
+#>    Post.mean Post.sd Cred.lb Cred.ub Pr.less Pr.greater
+#> C1      0.29    0.23    -0.1    0.66    0.10       0.90
+#> C2      0.07    0.23    -0.3    0.45    0.38       0.62
+#> ------ 
+#> Note:
+#> Pr.less: Posterior probability less than zero
+#> Pr.greater: Posterior probability greater than zero
+```
+
 ## References
 
-<div id="refs" class="references">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-rubin1981bayesian">
+<div id="ref-rodriguez2021painless" class="csl-entry">
+
+Rodriguez, Josue E, and Donald R Williams. 2021. “Painless Posterior
+Sampling: Bayesian Bootstrapped Correlation Coefficients.”
+
+</div>
+
+<div id="ref-rubin1981bayesian" class="csl-entry">
 
 Rubin, Donald B. 1981. “The Bayesian Bootstrap.” *The Annals of
 Statistics*, 130–34.
