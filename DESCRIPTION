@@ -1,7 +1,7 @@
 Package: BBcor
 Type: Package
 Title: Bayesian Bootstrapping Correlations
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
   person("Donald", "Williams", email = "drwwilliams@ucdavis.edu", role = c("aut", "cre")),
   person("Josue", "Rodriguez", email = "jerrodriguez@ucdavis.edu", role = c("aut"))
@@ -17,10 +17,15 @@ Imports:
   pbapply (>= 1.4-2),
   psych (>= 1.9.12.31),
   wdm (>= 0.2.1),
+  ggplot2 (>= 3.3.4),
   stats,
   utils,
   methods,
-  bayeslincom (>= 1.1.0)
+  bayeslincom (>= 1.1.0),
+  Rdpack
+Suggests:
+  BGGM
+RdMacros: Rdpack
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
