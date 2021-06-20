@@ -6,7 +6,7 @@
 #' @param x A matrix of dimensions \emph{n} by \emph{p}
 #' 
 #' @param method Character string. Which correlation coefficient should be computed. 
-#'               One of "pearson" (default), "kendall", "spearman", "gaussian_rank", or "blomqvist"
+#'               One of "pearson" (default), "kendall", "spearman", "polychoric", "gaussian_rank", or "blomqvist"
 #'               (i.e., median correlation).
 #' 
 #' @param iter Numeric. How many posterior samples (defaults to \code{5000}) ?

@@ -87,3 +87,5 @@ compare <- function(lin_comb, obj, cred = 0.9, rope = NULL, contrast = NULL) {
 #' @export plot.bayeslincom
 
 plot.bayeslincom <- bayeslincom::plot.bayeslincom
+
+

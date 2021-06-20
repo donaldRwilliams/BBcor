@@ -4,20 +4,15 @@
 \alias{posterior_samples}
 \title{Extract Posterior Samples}
 \usage{
-posterior_samples(object, summary = TRUE, cred = 0.95, ...)
+posterior_samples(object, ...)
 }
 \arguments{
 \item{object}{An object of class \code{bbcor}}
 
-\item{summary}{Logical. Should the posterior samples be summarized (defaults to \code{TRUE})?}
-
-\item{cred}{Numeric. If \code{summary = TRUE}, the desired credible interval.}
-
 \item{...}{Currently ignored}
 }
 \value{
-Either a data frame summarizing the relations (\code{summary = TRUE}) or 
-a data frame including the posterior samples (\code{summary = FALSE})
+A data frame including the posterior samples
 }
 \description{
 Extract Posterior Samples
