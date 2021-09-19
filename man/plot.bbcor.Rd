@@ -24,7 +24,7 @@ An object of class \code{ggplot}
 Plot bbcor point estimates and intervals
 }
 \examples{
-Y <- BGGM::ptsd
+Y <- mtcars[, 1:5]
 bb <- bbcor(Y)
 plot(bb)
 

@@ -2,7 +2,8 @@
 #' 
 #' @param object An object of class \code{bbcor}
 #' @param ci The desired credible interval
-#' @param ... Currengly ignroed
+#' @param decimals The number of decimals points to which estimates should be rounded
+#' @param ... Currently ignored
 #' 
 #' @return A \code{data.frame} summarizing the relations
 #' 
@@ -12,11 +13,11 @@
 #' @examples 
 #'
 #' Y <- mtcars[, 1:5]
-#' bb_samps <- bbcor(Y, method = "spearman")
+#' bb <- bbcor(Y, method = "spearman")
 #' 
-#' summary(bb_samps)
+#' summary(bb)
 
-summary.bbcor <- function(object, ci = 0.9, ...) {
+summary.bbcor <- function(object, ci = 0.9, decimals = 2, ...) {
   samples <- posterior_samples(object)
   
   lb <- (1 - ci) /2
@@ -31,7 +32,7 @@ summary.bbcor <- function(object, ci = 0.9, ...) {
   
   post_summary <- cbind.data.frame(
     Relation = colnames(samples),
-    round(main_df, 2)
+    round(main_df, decimals)
   )
   row.names(post_summary) <- NULL
   
@@ -49,7 +50,7 @@ summary.bbcor <- function(object, ci = 0.9, ...) {
 #' @return An object of class \code{ggplot}
 #'
 #' @examples
-#'Y <- BGGM::ptsd
+#'Y <- mtcars[, 1:5]
 #'bb <- bbcor(Y)
 #'plot(bb)
 #'

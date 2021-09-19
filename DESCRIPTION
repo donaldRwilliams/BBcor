@@ -21,7 +21,7 @@ Imports:
   stats,
   utils,
   methods,
-  bayeslincom (>= 1.1.0),
+  bayeslincom (>= 1.2.0),
   Rdpack
 Suggests:
   BGGM
