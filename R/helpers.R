@@ -130,6 +130,10 @@ print.bayeslincom <- function(x, decimals = 2, ...) {
   
   # ---- Begin pasting output ----
   cat("------ \n")
+  cat("Call:\n")
+  print(x$call)
+  
+  cat("------ \n")
   
   cat("Combinations:\n")
   comb_list <- extract_list_items(res, "lin_comb")
