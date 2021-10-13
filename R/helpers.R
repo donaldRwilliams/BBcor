@@ -1,7 +1,7 @@
 bb_weights <- function(n){
   wts <- stats::rgamma(n, 1, 1)
   wts <- wts / sum(wts)
-  wts
+  return(wts)
 }
 
 normalize <- function(data, n) {
@@ -89,3 +89,78 @@ compare <- function(lin_comb, obj, cred = 0.9, rope = NULL, contrast = NULL) {
 plot.bayeslincom <- bayeslincom::plot.bayeslincom
 
 
+
+
+
+#--------------------
+extract_list_items <- function(x, item, as_df = FALSE) {
+  out <- sapply(x, "[[", item)
+  if (as_df) out <- as.data.frame(out)
+  return(out)
+}
+
+#' Print formatted summary of a \code{bayeslincom} object
+#'
+#' @param x An object of class \code{bayeslincom}
+#' @param decimals The number of decimals points to which estimates should be rounded
+#' @param ... Other arguments to be passed to \code{print}
+#' @return A formatted summary of posterior samples
+#' @export print.bayeslincom
+#' @export
+
+print.bayeslincom <- function(x, decimals = 2, ...) {
+  res <- x$results
+  
+  cri_raw <- extract_list_items(res, "ci")
+  cri <- round(cri_raw, decimals)
+  
+  Post.mean_raw <- extract_list_items(res, "mean_samples")
+  Post.mean <- round(Post.mean_raw, decimals)
+  
+  Post.sd_raw <- extract_list_items(res, "sd_samples")
+  Post.sd <- round(Post.sd_raw, decimals)
+  
+  print_df <- data.frame(
+    Post.mean = Post.mean,
+    Post.sd = Post.sd,
+    Cred.lb = cri[1, ],
+    Cred.ub = cri[2, ]
+  )
+  row.names(print_df) <- names(x$results)
+  
+  # ---- Begin pasting output ----
+  cat("------ \n")
+  cat("Call:\n")
+  print(x$call)
+  
+  cat("------ \n")
+  
+  cat("Combinations:\n")
+  comb_list <- extract_list_items(res, "lin_comb")
+  
+  for (comb in seq_along(comb_list)) {
+    cat(paste0(" C", comb, ":"), comb_list[[comb]], "\n")
+  }
+  cat("------ \n")
+  
+  cat("Posterior Summary:\n\n")
+  
+  if (!is.null(x$rope)) {
+    cat("ROPE: [", x$rope[[1]], ",", x$rope[[2]], "] \n\n")
+    print_df$Pr.in <- extract_list_items(res, "rope_overlap")
+    
+    # note for ROPE
+    note <- "Pr.in: Posterior probability in ROPE"
+  } else {
+    prob_greater <- extract_list_items(res, "prob_greater")
+    print_df$Pr.less <- round(1 - prob_greater, decimals)
+    print_df$Pr.greater<- round(prob_greater, decimals)
+    
+    note <- paste0("Pr.less: Posterior probability less than zero\n",
+                   "Pr.greater: Posterior probability greater than zero")
+  }
+  
+  print(print_df, right = T)
+  cat("------ \n")
+  cat(paste0("Note:\n", note))
+}

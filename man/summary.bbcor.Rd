@@ -4,14 +4,16 @@
 \alias{summary.bbcor}
 \title{Summarize posterior samples from bbcor object}
 \usage{
-\method{summary}{bbcor}(object, ci = 0.9, ...)
+\method{summary}{bbcor}(object, ci = 0.9, decimals = 2, ...)
 }
 \arguments{
 \item{object}{An object of class \code{bbcor}}
 
 \item{ci}{The desired credible interval}
 
-\item{...}{Currengly ignroed}
+\item{decimals}{The number of decimals points to which estimates should be rounded}
+
+\item{...}{Currently ignored}
 }
 \value{
 A \code{data.frame} summarizing the relations
@@ -22,7 +24,7 @@ Summarize posterior samples from bbcor object
 \examples{
 
 Y <- mtcars[, 1:5]
-bb_samps <- bbcor(Y, method = "spearman")
+bb <- bbcor(Y, method = "spearman")
 
-summary(bb_samps)
+summary(bb)
 }
